@@ -1,0 +1,10 @@
+.footer {
+  display: flex;
+}
+
+.copy__right {
+  margin-left: 20px;
+  margin-right: 50px;
+  font-size: 20px;
+  letter-spacing: 5px;
+}

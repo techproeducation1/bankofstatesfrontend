@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import SearchIcon from "@material-ui/icons/Search";
+import logo from "../images/logo.png";
 import "./Header.css";
 
 function Header() {
@@ -8,11 +9,7 @@ function Header() {
     <nav className="header">
       {/*Logo */}
       <Link to="/">
-        <img
-          className="header__logo"
-          src="http://pngimg.com/uploads/letter_b/letter_b_PNG15.png"
-          alt=""
-        />
+        <img className="header__logo" src={logo} alt="" />
       </Link>
       <div>
         <span className="header__title">Bank of States</span>

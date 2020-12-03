@@ -8,6 +8,7 @@
 }
 .header__logo {
   width: 50px;
+  object-fit: contain;
 }
 
 .header__title {
