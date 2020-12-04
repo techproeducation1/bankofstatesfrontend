@@ -8,6 +8,7 @@ function App() {
   return (
     <Router>
       <div className="app">
+        <Header />
         <Switch>
           <Route path="/login">
             <h1>Login</h1>
@@ -17,11 +18,10 @@ function App() {
           </Route>
           {/*This is Default Page */}
           <Route path="/">
-            <Header />
             <Home />
-            <Footer />
           </Route>
         </Switch>
+        <Footer />
       </div>
     </Router>
   );

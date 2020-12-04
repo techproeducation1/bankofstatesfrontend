@@ -9,6 +9,9 @@ import "./Service.css";
 export default function Service() {
   return (
     <div className="service">
+      <div>
+        <h1 className="service">Different Types of Services</h1>
+      </div>
       <Accordion>
         <AccordionSummary
           expandIcon={<ExpandMoreIcon />}

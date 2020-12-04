@@ -62,3 +62,13 @@
   font-size: 15px;
   font-weight: bold;
 }
+
+.header__optionBasket {
+  display: flex;
+  align-items: center;
+}
+
+.header__basketCount {
+  margin-left: 10px;
+  margin-right: 10px;
+}

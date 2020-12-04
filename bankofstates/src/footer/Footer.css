@@ -1,10 +1,12 @@
 .footer {
   display: flex;
+  background: #0c2340;
+  margin-bottom: 20px;
 }
-
 .copy__right {
   margin-left: 20px;
   margin-right: 50px;
-  font-size: 20px;
+  font-size: 15px;
+  color: white;
   letter-spacing: 5px;
 }
