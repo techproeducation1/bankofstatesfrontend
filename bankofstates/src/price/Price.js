@@ -11,6 +11,11 @@ function Price() {
             <div className="section-title">
               <h6 className="subtitle subtitle-thumb">Our Packages</h6>
               <h2 className="title">Grab Our Package</h2>
+              <p>
+                The right banking package for you . Get the privilege of
+                choosing between our many Banking Packages, and enjoy services
+                that will reward you and fit your lifestyle.
+              </p>
             </div>
           </div>
         </div>
