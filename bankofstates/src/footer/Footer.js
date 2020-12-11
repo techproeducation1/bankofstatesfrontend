@@ -1,6 +1,11 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import logo from "../images/logo.png";
 import "./Footer.css";
+import TwitterIcon from "@material-ui/icons/Twitter";
+import FacebookIcon from "@material-ui/icons/Facebook";
+import LinkedInIcon from "@material-ui/icons/LinkedIn";
+import PinterestIcon from "@material-ui/icons/Pinterest";
 function Footer() {
   return (
     <div>
@@ -9,46 +14,34 @@ function Footer() {
           <div className="footer-inner">
             <div className="row">
               <div className="col-lg-3 col-md-6">
-                <div className="widget widget-address">
-                  <Link className="widget-title initiate-scripts" to={"/"}>
-                    <img src="content/assets/img/logo-2.png" alt="logo" />
+                <div className="widget">
+                  <Link className="widget-title" to={"/"}>
+                    <img className="footer__logo" src={logo} alt="logo" />
+                    Bank of States
                   </Link>
                   <ul className="widget-list">
-                    <li>564, Manon road, F1 456 Caron Town.</li>
-                    <li>Office No 3456</li>
-                    <li>info@example.com</li>
-                    <li>234-5825852763</li>
+                    <li>112, West road, F1 456 Tram Town.</li>
+                    <li>Office No 2312</li>
+                    <li>info@bankofstates.com</li>
+                    <li>234-3434567</li>
                   </ul>
                 </div>
               </div>
               <div className="col-xl-2 col-lg-3 col-md-6 offset-lg-1">
                 <div className="widget widget-links">
-                  <h4 className="widget-title">Links.</h4>
+                  <div className="widget-title">Links</div>
                   <ul className="widget-list">
                     <li>
-                      <Link className="initiate-scripts" to={"/services"}>
-                        Banking Way
-                      </Link>
+                      <Link to={"/services"}>FAQs</Link>
                     </li>
                     <li>
-                      <Link className="initiate-scripts" to={"/services"}>
-                        FAQs
-                      </Link>
+                      <Link to={"/about"}>About Us</Link>
                     </li>
                     <li>
-                      <Link className="initiate-scripts" to={"/about"}>
-                        About Us
-                      </Link>
+                      <Link to={"/contact"}>Contact Us</Link>
                     </li>
                     <li>
-                      <Link className="initiate-scripts" to={"/contact"}>
-                        Contact Us
-                      </Link>
-                    </li>
-                    <li>
-                      <Link className="initiate-scripts" to={"/"}>
-                        Home
-                      </Link>
+                      <Link to={"/"}>Home</Link>
                     </li>
                   </ul>
                 </div>
@@ -58,29 +51,19 @@ function Footer() {
                   <h4 className="widget-title">About Us.</h4>
                   <ul className="widget-list">
                     <li>
-                      <Link className="initiate-scripts" to={"/about"}>
-                        About Us
-                      </Link>
+                      <Link to={"/about"}>About Us</Link>
                     </li>
                     <li>
-                      <Link className="initiate-scripts" to={"/blog"}>
-                        Blog
-                      </Link>
+                      <Link to={"/blog"}>Blog</Link>
                     </li>
                     <li>
-                      <Link className="initiate-scripts" to={"/contact"}>
-                        Contact Us
-                      </Link>
+                      <Link to={"/contact"}>Contact Us</Link>
                     </li>
                     <li>
-                      <Link className="initiate-scripts" to={"/"}>
-                        Sign in
-                      </Link>
+                      <Link to={"/"}>Sign in</Link>
                     </li>
                     <li>
-                      <Link className="initiate-scripts" to={"/"}>
-                        My Account
-                      </Link>
+                      <Link to={"/"}>My Account</Link>
                     </li>
                   </ul>
                 </div>
@@ -94,23 +77,23 @@ function Footer() {
                   </p>
                   <ul className="social-area">
                     <li>
-                      <Link className="initiate-scripts" to={"/"}>
-                        <i className="fa fa-facebook" />
+                      <Link to={"/"}>
+                        <TwitterIcon />
                       </Link>
                     </li>
                     <li>
-                      <Link className="initiate-scripts" to={"/"}>
-                        <i className="fa fa-twitter" />
+                      <Link to={"/"}>
+                        <FacebookIcon />
                       </Link>
                     </li>
                     <li>
-                      <Link className="initiate-scripts" to={"/"}>
-                        <i className="fa fa-linkedin" />
+                      <Link to={"/"}>
+                        <LinkedInIcon />
                       </Link>
                     </li>
                     <li>
-                      <Link className="initiate-scripts" to={"/"}>
-                        <i className="fa fa-pinterest" />
+                      <Link to={"/"}>
+                        <PinterestIcon />
                       </Link>
                     </li>
                   </ul>
@@ -127,54 +110,28 @@ function Footer() {
               <div className="text-lg-left text-center">
                 <ul>
                   <li>
-                    <Link className="initiate-scripts" to={"/"}>
-                      Terms & Conditions
-                    </Link>
+                    <Link to={"/"}>Terms & Conditions</Link>
                   </li>
                   <li>
-                    <Link className="initiate-scripts" to={"/"}>
-                      Privacy Policy
-                    </Link>
+                    <Link to={"/"}>Privacy Policy</Link>
                   </li>
                   <li>
-                    <Link className="initiate-scripts" to={"/"}>
-                      Sitemap
-                    </Link>
+                    <Link to={"/"}>Sitemap</Link>
                   </li>
                 </ul>
               </div>
             </div>
             <div className="col-lg-6 align-self-center">
               <div className="copy-right text-lg-right text-center">
-                @ 2020, GmiBank all right reserved
+                @ 2020, Bank of States all right reserved
               </div>
             </div>
           </div>
         </div>
       </div>
       {/* footer area end */}
-
-      {/* back to top area start */}
-      <div className="back-to-top">
-        <span className="back-top">
-          <i className="fa fa-angle-double-up" />
-        </span>
-      </div>
-      {/* back to top area end */}
     </div>
   );
-  /*
-  /*
-    <div className="footer">
-      <div className="copy__right">
-        Designed Devloped & Maintained by Techpro
-      </div>
-
-      <div className="copy__right">
-        @ 2020, Bank of States all right reserved
-      </div>
-    </div>
-    */
 }
 
 export default Footer;

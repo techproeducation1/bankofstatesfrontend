@@ -11,11 +11,6 @@ function Price() {
             <div className="section-title">
               <h6 className="subtitle subtitle-thumb">Our Packages</h6>
               <h2 className="title">Grab Our Package</h2>
-              <p>
-                Bank dipscing elitr, sed diam nonumy eirmod et accusam et justo
-                duo dolores et ea rebum. tet clita kasd gubergren, no sea
-                takimata sanctus est Lorem ipsum dolor sit amet.
-              </p>
             </div>
           </div>
         </div>

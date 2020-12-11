@@ -22,9 +22,10 @@ function About() {
                   Everything is possible. We can help you achieve your goals!
                 </h2>
                 <p>
-                  Online banking can save you a lot of time and effort, you can
-                  undertake most transactions from the comforts of your home.
-                  However, it is crucial to use internet banking safely.
+                  Internet Banking is a convenient way to do banking from the
+                  comfort of your home or office. Avoid the queue or delays and
+                  try our simple and secure Internet Banking facility for an
+                  unmatched online banking experience.
                 </p>
               </div>
               <div className="media media-1">
@@ -33,8 +34,8 @@ function About() {
                 </div>
                 <div className="media-body">
                   <p>
-                    Nro eos et accusam et justo duo dolores et ea rebum. Stet
-                    clita kasd gubergren, no sea takimata sanctus dolor sit.
+                    Just login today using your User ID and Password to
+                    experience the Internet Banking.
                   </p>
                 </div>
               </div>
@@ -44,8 +45,9 @@ function About() {
                 </div>
                 <div className="media-body">
                   <p>
-                    Easy pament process belief Lorem Ipsum is not simply random
-                    text. It has roots in a McClintock.
+                    With E-Banking Check Account Statement , Do Payments using
+                    Net Banking , Order Cheque Book and many more financial and
+                    non-financial services
                   </p>
                 </div>
               </div>

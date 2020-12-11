@@ -1,6 +1,5 @@
 import React from "react";
 import "./Home.css";
-import Service from "../service/Service.js";
 import Product from "../product/Product.js";
 import Price from "../price/Price.js";
 import About from "../about/About.js";
@@ -38,7 +37,6 @@ function Home() {
         />
       </div>
       <Price />
-      <Service />
     </div>
   );
 }

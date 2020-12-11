@@ -1,14 +1,6 @@
-.footer {
-  display: flex;
-  background: #0c2340;
-  margin-bottom: 20px;
-}
-.copy__right {
-  margin-left: 20px;
-  margin-right: 50px;
-  font-size: 15px;
-  color: white;
-  letter-spacing: 5px;
+.footer__logo {
+  width: 60px;
+  object-fit: contain;
 }
 
 /*--------------------------------------------------
@@ -20,7 +12,7 @@
   background-size: cover;
   margin-top: -86px;
   z-index: 0;
-  padding: 183px 0 57px;
+  padding: 30px 0 30px;
 }
 
 .footer-inner .widget-contact p {
@@ -54,4 +46,74 @@
 
 .footer-inner-2 .widget-contact .social-area li a:hover {
   background: #ff536d;
+}
+
+/*---------------------------------------------------
+	widget styles
+----------------------------------------------------*/
+
+.widget {
+  margin-bottom: 30px;
+}
+.widget-title {
+  color: #fff;
+  font-size: 24px;
+  font-weight: 600;
+}
+
+.widget-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.widget-list li {
+  color: #fff;
+  font-size: 16px;
+  font-weight: 400;
+  margin-bottom: 9px;
+  transition: all 0.3s ease-in;
+}
+
+.widget-list li a {
+  color: #fff;
+  font-size: 16px;
+  font-weight: 400;
+  margin-bottom: 9px;
+  transition: all 0.3s ease-in;
+}
+
+.widget p {
+  color: #fff;
+}
+
+.widget-list li:hover a {
+  color: #083996;
+}
+
+/*********** social-area style **************/
+.social-area {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: inline-flex;
+}
+.social-area li a {
+  font-size: 18px;
+  height: 46px;
+  width: 46px;
+  border-radius: 50%;
+  background: #fff;
+  display: inline-block;
+  line-height: 46px;
+  margin-left: 16px;
+  text-align: center;
+  transition: all 0.3s ease-in;
+}
+.social-area li a:hover {
+  background: #377dff;
+  color: #fff;
+}
+.social-area li:first-child a {
+  margin-left: 0;
 }
