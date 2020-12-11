@@ -1,16 +1,19 @@
 import React from "react";
-import banner from "../images/banner.png";
 import "./Home.css";
 import Service from "../service/Service.js";
 import Product from "../product/Product.js";
+import Price from "../price/Price.js";
+import About from "../about/About.js";
 import silver from "../images/card/silver.jpg";
 import gold from "../images/card/gold.jpg";
 import platinum from "../images/card/platinum.jpg";
+import Banner from "./Banner.js";
 
 function Home() {
   return (
     <div className="home">
-      <img className="home__image" src={banner} alt="" />
+      <Banner />
+      <About />
       <div className="home__row">
         <Product
           id="1231245"
@@ -34,9 +37,8 @@ function Home() {
           image={platinum}
         />
       </div>
-      <div>
-        <Service />
-      </div>
+      <Price />
+      <Service />
     </div>
   );
 }
