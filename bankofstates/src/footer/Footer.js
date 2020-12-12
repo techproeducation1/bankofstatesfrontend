@@ -71,10 +71,7 @@ function Footer() {
               <div className="col-lg-4 col-md-6">
                 <div className="widget widget-contact">
                   <h4 className="widget-title">Contact Us.</h4>
-                  <p>
-                    Our E-Banking in the most poular in the world Many desktop
-                    publishing packages and web page editors now use thei.
-                  </p>
+                  <p>Please connect with us through following channels</p>
                   <ul className="social-area">
                     <li>
                       <Link to={"/"}>
