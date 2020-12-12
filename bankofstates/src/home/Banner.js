@@ -39,7 +39,6 @@ const Banner = (props) => {
         onExited={() => setAnimating(false)}
         key={item.src}
       >
-        {console.log(item.src)}
         <img src={item.src} />
       </CarouselItem>
     );

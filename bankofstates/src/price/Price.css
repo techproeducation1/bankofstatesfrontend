@@ -10,7 +10,7 @@
   margin-bottom: 30px;
 }
 .single-price:hover {
-  background: #083996;
+  background: teal;
 }
 .single-price:hover .pricing-details {
   background: #0e42a4;
@@ -19,7 +19,7 @@
   color: #fff;
 }
 .single-price .pricing-details {
-  background: #377dff;
+  background: #086491;
   padding: 40px 0;
   border-radius: 5px 5px 0 0;
   transition: all 0.3s ease-in;
