@@ -35,7 +35,7 @@ function About() {
                 <div className="media-body">
                   <p>
                     Just login today using your User ID and Password to
-                    experience the Internet Banking.
+                    experience the Internet Banking
                   </p>
                 </div>
               </div>
