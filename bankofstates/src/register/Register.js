@@ -13,6 +13,70 @@ const RegisterSchema = Yup.object().shape({
   email: Yup.string().email("Invalid email").required("Required"),
 });
 
+const RegistrationForm = (props) => (
+  <div className="container">
+    <fieldset>
+      <legend>Register</legend>
+      <Form>
+        <Field
+          component={TextField}
+          name="firstName"
+          type="text"
+          label="FirstName"
+        />
+        {props.errors.firstName && props.touched.firstName ? (
+          <div>{props.errors.firstName}</div>
+        ) : null}
+        <br />
+        <Field
+          component={TextField}
+          name="lastName"
+          type="text"
+          label="lastName"
+        />
+        {props.errors.lastName && props.touched.lastName ? (
+          <div>{props.errors.lastName}</div>
+        ) : null}
+        <br />
+        <Field component={TextField} name="email" type="email" label="Email" />
+        {props.errors.email && props.touched.email ? (
+          <div>{props.errors.email}</div>
+        ) : null}
+        <br />
+        <Field
+          component={TextField}
+          type="password"
+          label="Password"
+          name="password"
+        />
+        {props.errors.password && props.touched.password ? (
+          <div>{props.errors.password}</div>
+        ) : null}
+        <br />
+        <Field
+          component={TextField}
+          type="password"
+          label="Confirm Password"
+          name="confirmPassword"
+        />
+        {props.errors.confirmpassword && props.touched.confirmpassword ? (
+          <div>{props.errors.confirmpassword}</div>
+        ) : null}
+        {props.isSubmitting && <LinearProgress />}
+        <br />
+        <Button
+          variant="contained"
+          color="primary"
+          disabled={props.isSubmitting}
+          onClick={props.submitForm}
+          className="register__btn"
+        >
+          Submit
+        </Button>
+      </Form>
+    </fieldset>
+  </div>
+);
 const Register = () => {
   return (
     <Formik
@@ -24,81 +88,15 @@ const Register = () => {
         confirmPassword: "",
       }}
       validationSchema={RegisterSchema}
-      onSubmit={(values, { setSubmitting }) => {
+      onSubmit={(values, actions) => {
         setTimeout(() => {
-          setSubmitting(false);
+          actions.setSubmitting(false);
           alert(JSON.stringify(values));
         }, 500);
+        actions.resetForm();
       }}
-    >
-      {({ submitForm, isSubmitting, errors, touched }) => (
-        <div className="container">
-          <fieldset>
-            <legend>Register</legend>
-            <Form>
-              <Field
-                component={TextField}
-                name="firstName"
-                type="text"
-                label="FirstName"
-              />
-              {errors.firstName && touched.firstName ? (
-                <div>{errors.firstName}</div>
-              ) : null}
-              <br />
-              <Field
-                component={TextField}
-                name="lastName"
-                type="text"
-                label="lastName"
-              />
-              {errors.lastName && touched.lastName ? (
-                <div>{errors.lastName}</div>
-              ) : null}
-              <br />
-              <Field
-                component={TextField}
-                name="email"
-                type="email"
-                label="Email"
-              />
-              {errors.email && touched.email ? <div>{errors.email}</div> : null}
-              <br />
-              <Field
-                component={TextField}
-                type="password"
-                label="Password"
-                name="password"
-              />
-              {errors.password && touched.password ? (
-                <div>{errors.password}</div>
-              ) : null}
-              <br />
-              <Field
-                component={TextField}
-                type="password"
-                label="Confirm Password"
-                name="confirmPassword"
-              />
-              {errors.confirmpassword && touched.confirmpassword ? (
-                <div>{errors.confirmpassword}</div>
-              ) : null}
-              {isSubmitting && <LinearProgress />}
-              <br />
-              <Button
-                variant="contained"
-                color="primary"
-                disabled={isSubmitting}
-                onClick={submitForm}
-                className="register__btn"
-              >
-                Submit
-              </Button>
-            </Form>
-          </fieldset>
-        </div>
-      )}
-    </Formik>
+      component={RegistrationForm}
+    ></Formik>
   );
 };
 export default Register;

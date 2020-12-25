@@ -10,6 +10,40 @@ const LoginSchema = Yup.object().shape({
   email: Yup.string().email("Invalid email").required("Required"),
 });
 
+const LoginForm = (props) => (
+  <div className="container">
+    <fieldset>
+      <legend>Login</legend>
+      <Form>
+        <Field component={TextField} name="email" type="email" label="Email" />
+        {props.errors.email && props.touched.email ? (
+          <div>{props.errors.email}</div>
+        ) : null}
+        <br />
+        <Field
+          component={TextField}
+          type="password"
+          label="Password"
+          name="password"
+        />
+        {props.errors.password && props.touched.password ? (
+          <div>{props.errors.password}</div>
+        ) : null}
+        {props.isSubmitting && <LinearProgress />}
+        <br />
+        <Button
+          variant="contained"
+          color="primary"
+          disabled={props.isSubmitting}
+          onClick={props.submitForm}
+          className="login__btn"
+        >
+          Submit
+        </Button>
+      </Form>
+    </fieldset>
+  </div>
+);
 const Login = () => {
   return (
     <Formik
@@ -18,51 +52,14 @@ const Login = () => {
         password: "",
       }}
       validationSchema={LoginSchema}
-      onSubmit={(values, { setSubmitting }) => {
+      onSubmit={(values, actions) => {
         setTimeout(() => {
-          setSubmitting(false);
+          actions.setSubmitting(false);
           alert(JSON.stringify(values));
         }, 500);
       }}
-    >
-      {({ submitForm, isSubmitting, errors, touched }) => (
-        <div className="container">
-          <fieldset>
-            <legend>Login</legend>
-            <Form>
-              <Field
-                component={TextField}
-                name="email"
-                type="email"
-                label="Email"
-              />
-              {errors.email && touched.email ? <div>{errors.email}</div> : null}
-              <br />
-              <Field
-                component={TextField}
-                type="password"
-                label="Password"
-                name="password"
-              />
-              {errors.password && touched.password ? (
-                <div>{errors.password}</div>
-              ) : null}
-              {isSubmitting && <LinearProgress />}
-              <br />
-              <Button
-                variant="contained"
-                color="primary"
-                disabled={isSubmitting}
-                onClick={submitForm}
-                className="login__btn"
-              >
-                Submit
-              </Button>
-            </Form>
-          </fieldset>
-        </div>
-      )}
-    </Formik>
+      component={LoginForm}
+    ></Formik>
   );
 };
 export default Login;
