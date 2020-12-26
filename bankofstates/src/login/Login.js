@@ -15,31 +15,44 @@ const LoginForm = (props) => (
     <fieldset>
       <legend>Login</legend>
       <Form>
-        <Field component={TextField} name="email" type="email" label="Email" />
-        {props.errors.email && props.touched.email ? (
-          <div>{props.errors.email}</div>
-        ) : null}
-        <br />
-        <Field
-          component={TextField}
-          type="password"
-          label="Password"
-          name="password"
-        />
-        {props.errors.password && props.touched.password ? (
-          <div>{props.errors.password}</div>
-        ) : null}
-        {props.isSubmitting && <LinearProgress />}
-        <br />
-        <Button
-          variant="contained"
-          color="primary"
-          disabled={props.isSubmitting}
-          onClick={props.submitForm}
-          className="login__btn"
-        >
-          Submit
-        </Button>
+        <div className="row justify-content-start">
+          <div className="col-lg-2 text-center p-3">
+            <Field
+              component={TextField}
+              name="email"
+              type="email"
+              label="Email"
+            />
+            {props.errors.email && props.touched.email ? (
+              <div>{props.errors.email}</div>
+            ) : null}
+          </div>
+          <div className="col-lg-2 text-center p-3">
+            <Field
+              component={TextField}
+              type="password"
+              label="Password"
+              name="password"
+            />
+            {props.errors.password && props.touched.password ? (
+              <div>{props.errors.password}</div>
+            ) : null}
+            {props.isSubmitting && <LinearProgress />}
+          </div>
+        </div>
+        <div className="row justify-content-start">
+          <div className="col-lg-4 text-center p-3">
+            <Button
+              variant="contained"
+              color="primary"
+              disabled={props.isSubmitting}
+              onClick={props.submitForm}
+              className="login__btn"
+            >
+              Submit
+            </Button>
+          </div>
+        </div>
       </Form>
     </fieldset>
   </div>
