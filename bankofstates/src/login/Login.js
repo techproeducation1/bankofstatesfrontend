@@ -2,12 +2,15 @@ import * as React from "react";
 import { Formik, Form, Field } from "formik";
 import { Button, LinearProgress } from "@material-ui/core";
 import { TextField } from "formik-material-ui";
+import service from "../service/bankService";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import * as Yup from "yup";
 import "./Login.css";
 
 const LoginSchema = Yup.object().shape({
   password: Yup.string().required("Required"),
-  email: Yup.string().email("Invalid email").required("Required"),
+  username: Yup.string().required("Required"),
 });
 
 const LoginForm = (props) => (
@@ -19,13 +22,10 @@ const LoginForm = (props) => (
           <div className="col-lg-2 text-center p-3">
             <Field
               component={TextField}
-              name="email"
-              type="email"
-              label="Email"
+              name="username"
+              type="text"
+              label="User Name"
             />
-            {props.errors.email && props.touched.email ? (
-              <div>{props.errors.email}</div>
-            ) : null}
           </div>
           <div className="col-lg-2 text-center p-3">
             <Field
@@ -34,9 +34,6 @@ const LoginForm = (props) => (
               label="Password"
               name="password"
             />
-            {props.errors.password && props.touched.password ? (
-              <div>{props.errors.password}</div>
-            ) : null}
             {props.isSubmitting && <LinearProgress />}
           </div>
         </div>
@@ -59,20 +56,45 @@ const LoginForm = (props) => (
 );
 const Login = () => {
   return (
-    <Formik
-      initialValues={{
-        email: "",
-        password: "",
-      }}
-      validationSchema={LoginSchema}
-      onSubmit={(values, actions) => {
-        setTimeout(() => {
+    <div>
+      <Formik
+        initialValues={{
+          username: "",
+          password: "",
+        }}
+        validationSchema={LoginSchema}
+        onSubmit={(values, actions) => {
+          service.login(values).then((response) => {
+            if (response.status === 200) {
+              if (response.data.tokenType) {
+                localStorage.setItem(
+                  "auth",
+                  JSON.stringify({
+                    isLoggedIn: true,
+                    tokenType: response.data.tokenType,
+                    token: response.data.accessToken,
+                  })
+                );
+              }
+              toast.success("Login Successful", {
+                position: toast.POSITION.TOP_CENTER,
+              });
+              actions.resetForm();
+              service.user().then((response) => {
+                console.log("User Data = ", response.data);
+              });
+            } else if (response.status === 401) {
+              toast.success("Unable to Login", {
+                position: toast.POSITION.TOP_CENTER,
+              });
+            }
+          });
           actions.setSubmitting(false);
-          alert(JSON.stringify(values));
-        }, 500);
-      }}
-      component={LoginForm}
-    ></Formik>
+        }}
+        component={LoginForm}
+      ></Formik>
+      <ToastContainer />
+    </div>
   );
 };
 export default Login;
