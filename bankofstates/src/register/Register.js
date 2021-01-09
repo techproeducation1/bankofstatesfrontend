@@ -1,6 +1,7 @@
 import * as React from "react";
 import { Formik, Form, Field } from "formik";
 import { Button, LinearProgress } from "@material-ui/core";
+import InputLabel from "@material-ui/core/InputLabel";
 import { TextField } from "formik-material-ui";
 import service from "../service/bankService";
 import { ToastContainer, toast } from "react-toastify";
@@ -14,6 +15,7 @@ const RegisterSchema = Yup.object().shape({
   lastName: Yup.string().required("Required"),
   password: Yup.string().required("Required"),
   dob: Yup.string().required("Required"),
+  username: Yup.string().required("Required"),
   confirmPassword: Yup.string().oneOf(
     [Yup.ref("password"), null],
     "Passwords must match"
@@ -69,6 +71,33 @@ const RegistrationForm = (props) => (
           <div className="col-lg-2 p-3">
             <Field
               component={TextField}
+              name="username"
+              type="text"
+              label="User Name"
+            />
+          </div>
+          <div className="col-lg-4 p-3">
+            <div id="checkbox-group">Role</div>
+            <div class="row">
+              <div class="col-lg-2">
+                <label class="p3">
+                  <Field type="checkbox" name="role" value="user" />
+                  User
+                </label>
+              </div>
+              <div class="col-lg-2">
+                <label class="p3">
+                  <Field type="checkbox" name="role" value="admin" />
+                  Admin
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="row justify-content-start">
+          <div className="col-lg-2 p-3">
+            <Field
+              component={TextField}
               type="password"
               label="Password"
               name="password"
@@ -110,19 +139,15 @@ const Register = () => {
           lastName: "",
           dob: "",
           email: "",
+          username: "",
+          role: ["user"],
           password: "",
           confirmPassword: "",
         }}
         validationSchema={RegisterSchema}
         onSubmit={(values, actions) => {
-          let userInfo = {
-            name: values.firstName,
-            username: values.firstName,
-            email: values.email,
-            password: values.password,
-            role: ["admin"],
-          };
-          service.register(userInfo).then((response) => {
+          console.log("Object", values);
+          service.register(values).then((response) => {
             if (response.status === 200 && response.data.success) {
               toast.success(response.data.message, {
                 position: toast.POSITION.TOP_CENTER,

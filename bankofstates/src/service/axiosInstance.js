@@ -4,7 +4,7 @@ function getToken() {
   const auth = JSON.parse(localStorage.getItem("auth"));
   let token = null;
   if (auth && auth.isLoggedIn) {
-    token = `${auth.tokenType} ${auth.token}`;
+    token = `Bearer ${auth.token}`;
   }
   return token;
 }

@@ -71,8 +71,7 @@ const Login = () => {
                   "auth",
                   JSON.stringify({
                     isLoggedIn: true,
-                    tokenType: response.data.tokenType,
-                    token: response.data.accessToken,
+                    token: response.data.jwt,
                   })
                 );
               }
