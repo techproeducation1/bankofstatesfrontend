@@ -6,6 +6,8 @@ import Footer from "./footer/Footer";
 import Register from "./register/Register";
 import Login from "./login/Login";
 import Home from "./home/Home";
+import Admin from "./admin/Admin";
+import User from "./user/User";
 function App() {
   return (
     <Router>
@@ -20,6 +22,12 @@ function App() {
           </Route>
           <Route path="/register">
             <Register />
+          </Route>
+          <Route path="/admin">
+            <Admin />
+          </Route>
+          <Route path="/user">
+            <User />
           </Route>
           {/*This is Default Page */}
           <Route path="/">

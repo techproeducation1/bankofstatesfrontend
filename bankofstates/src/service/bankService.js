@@ -9,8 +9,5 @@ class BankService {
   register(userInfo) {
     return axios.post(BASE_URL + "/auth/register", userInfo);
   }
-  user() {
-    return axiosInstance.get(BASE_URL + "/api/test/user");
-  }
 }
 export default new BankService();

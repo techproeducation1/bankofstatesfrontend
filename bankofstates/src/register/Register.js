@@ -78,15 +78,15 @@ const RegistrationForm = (props) => (
           </div>
           <div className="col-lg-4 p-3">
             <div id="checkbox-group">Role</div>
-            <div class="row">
-              <div class="col-lg-2">
-                <label class="p3">
+            <div className="row">
+              <div className="col-lg-2">
+                <label className="p3">
                   <Field type="checkbox" name="role" value="user" />
                   User
                 </label>
               </div>
-              <div class="col-lg-2">
-                <label class="p3">
+              <div className="col-lg-2">
+                <label className="p3">
                   <Field type="checkbox" name="role" value="admin" />
                   Admin
                 </label>

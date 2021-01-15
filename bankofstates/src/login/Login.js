@@ -4,6 +4,8 @@ import { Button, LinearProgress } from "@material-ui/core";
 import { TextField } from "formik-material-ui";
 import service from "../service/bankService";
 import { ToastContainer, toast } from "react-toastify";
+import { useStateValue } from "../StateProvider";
+import { useHistory } from "react-router";
 import "react-toastify/dist/ReactToastify.css";
 import * as Yup from "yup";
 import "./Login.css";
@@ -55,6 +57,8 @@ const LoginForm = (props) => (
   </div>
 );
 const Login = () => {
+  const history = useHistory();
+  const [{ userInfo }, dispatch] = useStateValue();
   return (
     <div>
       <Formik
@@ -66,26 +70,28 @@ const Login = () => {
         onSubmit={(values, actions) => {
           service.login(values).then((response) => {
             if (response.status === 200) {
-              if (response.data.tokenType) {
-                localStorage.setItem(
-                  "auth",
-                  JSON.stringify({
-                    isLoggedIn: true,
-                    token: response.data.jwt,
-                  })
-                );
+              const userInfo = response.data;
+              localStorage.setItem(
+                "auth",
+                JSON.stringify({
+                  isLoggedIn: true,
+                  token: userInfo.jwt,
+                  user: userInfo.user,
+                })
+              );
+              dispatch({
+                type: "LOGIN",
+                item: userInfo,
+              });
+              if (userInfo?.user?.isAdmin) {
+                history.push("/admin");
+              } else {
+                history.push("/user");
               }
               toast.success("Login Successful", {
                 position: toast.POSITION.TOP_CENTER,
               });
               actions.resetForm();
-              service.user().then((response) => {
-                console.log("User Data = ", response.data);
-              });
-            } else if (response.status === 401) {
-              toast.success("Unable to Login", {
-                position: toast.POSITION.TOP_CENTER,
-              });
             }
           });
           actions.setSubmitting(false);

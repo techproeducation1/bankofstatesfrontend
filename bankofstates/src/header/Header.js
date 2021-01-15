@@ -2,12 +2,13 @@ import React from "react";
 import { Link } from "react-router-dom";
 import SearchIcon from "@material-ui/icons/Search";
 import ShoppingCart from "@material-ui/icons/ShoppingCart";
+import ExitToApp from "@material-ui/icons/ExitToApp";
 import logo from "../images/logo.png";
 import "./Header.css";
 import { useStateValue } from "../StateProvider";
 
 function Header() {
-  const [{ cart }, dispatch] = useStateValue();
+  const [{ cart, userInfo }, dispatch] = useStateValue();
   return (
     <nav className="header">
       {/*Logo */}
@@ -21,29 +22,49 @@ function Header() {
         <input type="text" className="header__searchInput" />
         <SearchIcon className="header__searchIcon" />
       </div>
-      <div className="header__nav">
-        <Link to="/login" className="header__link">
+      {!userInfo && (
+        <div className="header__nav">
+          <Link to="/login" className="header__link">
+            <div className="header__option">
+              <span className="header__lineOne">Hello</span>
+              <span className="header__lineTwo">Sign In</span>
+            </div>
+          </Link>
+          <Link to="/register" className="header__link">
+            <div className="header__option">
+              <span className="header__lineOne">New User</span>
+              <span className="header__lineTwo">Register</span>
+            </div>
+          </Link>
+          <Link to="/checkout" className="header__link">
+            <div className="header__optionBasket">
+              <ShoppingCart />
+              <span className="header__lineTwo header__basketCount">
+                {console.log("cart", cart)}
+                {cart?.length}
+              </span>
+            </div>
+          </Link>
+        </div>
+      )}
+      {userInfo && userInfo.user && (
+        <div className="header__nav header__link">
           <div className="header__option">
-            <span className="header__lineOne">Hello</span>
-            <span className="header__lineTwo">Sign In</span>
-          </div>
-        </Link>
-        <Link to="/register" className="header__link">
-          <div className="header__option">
-            <span className="header__lineOne">New User</span>
-            <span className="header__lineTwo">Register</span>
-          </div>
-        </Link>
-        <Link to="/checkout" className="header__link">
-          <div className="header__optionBasket">
-            <ShoppingCart />
-            <span className="header__lineTwo header__basketCount">
-              {console.log("cart", cart)}
-              {cart?.length}
+            <span className="header__lineOne">Welcome</span>
+            <span className="header__lineTwo">
+              {userInfo.user.firstName} {userInfo.user.lastName}
             </span>
           </div>
-        </Link>
-      </div>
+          <Link to="/logout" className="header__link">
+            <div className="header__option">
+              <span className="header__lineOne">
+                <ExitToApp />
+              </span>
+              <span className="header__lineOne">Logout</span>
+            </div>
+          </Link>
+        </div>
+      )}
     </nav>
   );
 }
