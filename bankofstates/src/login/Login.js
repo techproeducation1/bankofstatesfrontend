@@ -74,9 +74,7 @@ const Login = () => {
               localStorage.setItem(
                 "auth",
                 JSON.stringify({
-                  isLoggedIn: true,
                   token: userInfo.jwt,
-                  user: userInfo.user,
                 })
               );
               dispatch({
@@ -90,6 +88,9 @@ const Login = () => {
               }
               toast.success("Login Successful", {
                 position: toast.POSITION.TOP_CENTER,
+              });
+              service.balance().then((response) => {
+                console.log("Balance is ", response.data);
               });
               actions.resetForm();
             }

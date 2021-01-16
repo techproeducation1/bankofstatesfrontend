@@ -40,7 +40,6 @@ function Header() {
             <div className="header__optionBasket">
               <ShoppingCart />
               <span className="header__lineTwo header__basketCount">
-                {console.log("cart", cart)}
                 {cart?.length}
               </span>
             </div>
