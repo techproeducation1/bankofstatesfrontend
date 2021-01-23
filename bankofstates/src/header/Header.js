@@ -6,6 +6,8 @@ import ExitToApp from "@material-ui/icons/ExitToApp";
 import logo from "../images/logo.png";
 import "./Header.css";
 import { useStateValue } from "../StateProvider";
+import AdminMenu from "../menus/AdminMenu";
+import UserMenu from "../menus/UserMenu";
 
 function Header() {
   const [{ cart, userInfo }, dispatch] = useStateValue();
@@ -46,6 +48,8 @@ function Header() {
           </Link>
         </div>
       )}
+      {userInfo && userInfo.user && userInfo.user.isAdmin && <AdminMenu />}
+      {userInfo && userInfo.user && !userInfo.user.isAdmin && <UserMenu />}
       {userInfo && userInfo.user && (
         <div className="header__nav header__link">
           <div className="header__option">
