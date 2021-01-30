@@ -18,6 +18,11 @@ const UserMenu = () => {
     setAnchorEl(null);
   };
 
+  const showDashboard = () => {
+    history.push("/user");
+    setAnchorEl(null);
+  };
+
   const handleDeposit = () => {
     history.push("/deposit");
     setAnchorEl(null);
@@ -52,6 +57,7 @@ const UserMenu = () => {
         open={Boolean(anchorEl)}
         onClose={handleClose}
       >
+        <MenuItem onClick={showDashboard}>Dashboard</MenuItem>
         <MenuItem onClick={handleDeposit}>Deposit</MenuItem>
         <MenuItem onClick={handleWithdrawal}>Withdrawal</MenuItem>
         <MenuItem onClick={handleTransfer}>Transfer</MenuItem>

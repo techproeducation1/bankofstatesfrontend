@@ -89,9 +89,6 @@ const Login = () => {
               toast.success("Login Successful", {
                 position: toast.POSITION.TOP_CENTER,
               });
-              service.balance().then((response) => {
-                console.log("Balance is ", response.data);
-              });
               actions.resetForm();
             }
           });
