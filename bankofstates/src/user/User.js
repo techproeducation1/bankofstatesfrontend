@@ -19,37 +19,10 @@ import CardIcon from "../components/Card/CardIcon.js";
 import CardFooter from "../components/Card/CardFooter.js";
 import PlotlyChart from "../chart/PlotlyChart";
 import styles from "../styles/dashboardStyle.js";
+
+import _ from "lodash";
+
 const useStyles = makeStyles(styles);
-const barData = [
-  {
-    type: "bar",
-    x: [
-      "1-Jan-2020",
-      "2-Jan-2020",
-      "3-Jan-2020",
-      "4-Jan-2020",
-      "5-Jan-2020",
-      "6-Jan-2020",
-      "7-Jan-2020",
-    ],
-    y: [3000, 5000, 1000, 2000, 10000, 3800, 7000],
-  },
-];
-const scatterData = [
-  {
-    type: "scatter",
-    x: [
-      "1-Jan-2020",
-      "2-Jan-2020",
-      "3-Jan-2020",
-      "4-Jan-2020",
-      "5-Jan-2020",
-      "6-Jan-2020",
-      "7-Jan-2020",
-    ],
-    y: [1000, 500, 300, 200, 100, 3000, 2500],
-  },
-];
 const transferData = [
   {
     type: "funnel",
@@ -62,6 +35,42 @@ const User = () => {
   const classes = useStyles();
   const [{ userInfo }] = useStateValue();
   const history = useHistory();
+  const transactions = userInfo.user.transactions;
+  console.log(transactions);
+  const uniqDates = _.uniq(_.map(transactions, "date")).sort();
+  const depositArray = [];
+  const withdrawalArray = [];
+  uniqDates.forEach(function (key) {
+    const deposits = _.filter(transactions, function (tran) {
+      return tran.type === "DEPOSIT" && tran.date === key;
+    });
+    const withdraws = _.filter(transactions, function (tran) {
+      return tran.type === "WITHDRAW" && tran.date === key;
+    });
+    const depositAmounts = _.map(deposits, "amount");
+    const depositSum = _.sum(depositAmounts);
+    depositArray.push(depositSum);
+
+    const withdrawAmounts = _.map(withdraws, "amount");
+    const withdrawSum = _.sum(withdrawAmounts);
+    withdrawalArray.push(withdrawSum);
+  });
+  const barData = [
+    {
+      type: "bar",
+      x: uniqDates,
+      y: depositArray,
+    },
+  ];
+  const scatterData = [
+    {
+      type: "scatter",
+      x: uniqDates,
+      y: withdrawalArray,
+    },
+  ];
+  const totalDeposit = _.sum(depositArray);
+  const totalWithdraw = _.sum(withdrawalArray);
   return (
     <div>
       {!userInfo && history.push("/login")}
@@ -76,7 +85,7 @@ const User = () => {
                   </CardIcon>
                   <p className={classes.cardCategory}>Balance</p>
                   <h3 className={classes.cardTitle}>
-                    $ {userInfo.user.accountBalance}
+                    ${userInfo.user.accountBalance}
                   </h3>
                 </CardHeader>
                 <CardFooter stats>
@@ -94,7 +103,7 @@ const User = () => {
                     <AttachMoney />
                   </CardIcon>
                   <p className={classes.cardCategory}>Deposits</p>
-                  <h3 className={classes.cardTitle}>$ 34245</h3>
+                  <h3 className={classes.cardTitle}>${totalDeposit}</h3>
                 </CardHeader>
                 <CardFooter stats>
                   <div className={classes.stats}>
@@ -111,7 +120,7 @@ const User = () => {
                     <AccountBalanceWallet />
                   </CardIcon>
                   <p className={classes.cardCategory}>Withdrawals</p>
-                  <h3 className={classes.cardTitle}>$30000</h3>
+                  <h3 className={classes.cardTitle}>${totalWithdraw}</h3>
                 </CardHeader>
                 <CardFooter stats>
                   <div className={classes.stats}>

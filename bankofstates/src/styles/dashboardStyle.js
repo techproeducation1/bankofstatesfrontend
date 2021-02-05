@@ -1,6 +1,12 @@
 import { successColor, whiteColor, greyColor, hexToRgb } from "./colors.js";
 
 const dashboardStyle = {
+  root: {
+    width: "100%",
+  },
+  container: {
+    maxHeight: 440,
+  },
   successText: {
     color: successColor[0],
   },

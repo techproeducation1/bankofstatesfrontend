@@ -15,5 +15,8 @@ class BankService {
   withdraw(transactionInfo) {
     return axiosInstance.post(BASE_URL + "/account/withdraw", transactionInfo);
   }
+  getAllUsers() {
+    return axiosInstance.get(BASE_URL + "/user/all");
+  }
 }
 export default new BankService();

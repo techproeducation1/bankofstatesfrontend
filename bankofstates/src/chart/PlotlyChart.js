@@ -2,7 +2,6 @@ import React from "react";
 import Plot from "react-plotly.js";
 
 const PlotlyChart = ({ data }) => {
-  console.log("Bar Data => ", data);
   return (
     <Plot
       data={data}
