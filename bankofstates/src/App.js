@@ -9,6 +9,8 @@ import Logout from "./logout/Logout";
 import Register from "./register/Register";
 import Deposit from "./deposit/Deposit";
 import Withdraw from "./withdraw/Withdraw";
+import AddRecipient from "./transfer/AddRecipient";
+import Transfer from "./transfer/Transfer";
 import Admin from "./admin/Admin";
 import UserMgmt from "./admin/UserMgmt";
 import User from "./user/User";
@@ -38,6 +40,12 @@ function App() {
           </Route>
           <Route path="/withdrawal">
             <Withdraw />
+          </Route>
+          <Route path="/addRecipient">
+            <AddRecipient />
+          </Route>
+          <Route path="/transfer">
+            <Transfer />
           </Route>
           <Route path="/logout">
             <Logout />

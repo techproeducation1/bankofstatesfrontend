@@ -36,8 +36,11 @@ const User = () => {
   const [{ userInfo }] = useStateValue();
   const history = useHistory();
   const transactions = userInfo.user.transactions;
-  console.log(transactions);
   const uniqDates = _.uniq(_.map(transactions, "date")).sort();
+  let totalRecipients = 0;
+  if (userInfo?.user?.recipients?.length > 0) {
+    totalRecipients = userInfo.user.recipients.length;
+  }
   const depositArray = [];
   const withdrawalArray = [];
   uniqDates.forEach(function (key) {
@@ -137,7 +140,7 @@ const User = () => {
                     <Accessibility />
                   </CardIcon>
                   <p className={classes.cardCategory}>Recipients</p>
-                  <h3 className={classes.cardTitle}>5</h3>
+                  <h3 className={classes.cardTitle}>{totalRecipients}</h3>
                 </CardHeader>
                 <CardFooter stats>
                   <div className={classes.stats}>

@@ -33,7 +33,7 @@ const AccountInfo = () => {
             </CardHeader>
           </Card>
         </GridItem>
-        <GridItem xs={24} sm={12} md={6}>
+        <GridItem xs={12} sm={12} md={6}>
           <Card>
             <CardHeader color="success" icon>
               <CardIcon color="success">

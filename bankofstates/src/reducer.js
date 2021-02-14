@@ -1,5 +1,6 @@
 export const initialState = {
   cart: [],
+  recipients: [],
   userInfo: null,
 };
 
@@ -9,6 +10,8 @@ const reducer = (state, action) => {
       return { ...state, userInfo: action.item };
     case "UPDATE":
       return { ...state, userInfo: action.item };
+    case "RECIPIENTS":
+      return { ...state, recipients: action.item };
     case "ADD_TO_CART":
       return {
         ...state,
