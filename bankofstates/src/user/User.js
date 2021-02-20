@@ -23,14 +23,7 @@ import styles from "../styles/dashboardStyle.js";
 import _ from "lodash";
 
 const useStyles = makeStyles(styles);
-const transferData = [
-  {
-    type: "funnel",
-    x: [3500, 3000, 2800, 2500, 2000, 1000, 500],
-    y: ["5/Jan", "8/Jan", "2/Jan", "1/Jan", "7/Jan", "3/Jan", "10/Jan"],
-    hoverinfo: "percent total+x",
-  },
-];
+
 const User = () => {
   const classes = useStyles();
   const [{ userInfo }] = useStateValue();
@@ -43,12 +36,17 @@ const User = () => {
   }
   const depositArray = [];
   const withdrawalArray = [];
+  const transferArray = [];
   uniqDates.forEach(function (key) {
     const deposits = _.filter(transactions, function (tran) {
       return tran.type === "DEPOSIT" && tran.date === key;
     });
     const withdraws = _.filter(transactions, function (tran) {
       return tran.type === "WITHDRAW" && tran.date === key;
+    });
+
+    const transfers = _.filter(transactions, function (tran) {
+      return tran.isTransfer && tran.date === key;
     });
     const depositAmounts = _.map(deposits, "amount");
     const depositSum = _.sum(depositAmounts);
@@ -57,7 +55,16 @@ const User = () => {
     const withdrawAmounts = _.map(withdraws, "amount");
     const withdrawSum = _.sum(withdrawAmounts);
     withdrawalArray.push(withdrawSum);
+
+    const transferAmounts = _.map(transfers, "amount");
+    const transferSum = _.sum(transferAmounts);
+    const transferObject = {
+      date: key.substring(0, 5),
+      amount: transferSum,
+    };
+    transferArray.push(transferObject);
   });
+  const orderedTransferArray = _.orderBy(transferArray, ["amount"]).reverse();
   const barData = [
     {
       type: "bar",
@@ -70,6 +77,14 @@ const User = () => {
       type: "scatter",
       x: uniqDates,
       y: withdrawalArray,
+    },
+  ];
+  const transferData = [
+    {
+      type: "funnel",
+      x: _.map(orderedTransferArray, "amount"),
+      y: _.map(orderedTransferArray, "date"),
+      hoverinfo: "percent total+x",
     },
   ];
   const totalDeposit = _.sum(depositArray);

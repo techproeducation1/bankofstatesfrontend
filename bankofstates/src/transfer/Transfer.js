@@ -1,11 +1,20 @@
-import React from "react";
+import React, { useState } from "react";
 
 import { Formik, Form, Field } from "formik";
-import { Select, MenuItem, Button, LinearProgress } from "@material-ui/core";
-import { TextField } from "formik-material-ui";
+import {
+  FormControl,
+  InputLabel,
+  Select,
+  MenuItem,
+  Button,
+  LinearProgress,
+} from "@material-ui/core";
+import { Autocomplete } from "@material-ui/lab";
+import { TextField as FormikTextField } from "formik-material-ui";
+import TextField from "@material-ui/core/TextField";
 import service from "../service/bankService";
-import { ToastContainer, toast } from "react-toastify";
 import { useStateValue } from "../StateProvider";
+import { ToastContainer, toast } from "react-toastify";
 import { useHistory } from "react-router";
 import AccountInfo from "../account/AccountInfo";
 import Transactions from "../account/Transactions";
@@ -18,9 +27,11 @@ import styles from "../styles/typographyStyle.js";
 const useStyles = makeStyles(styles);
 
 const TransferSchema = Yup.object().shape({
-  amount: Yup.string().required("Required"),
   recipientName: Yup.string().required("Required"),
+  amount: Yup.string().required("Required"),
 });
+let classes;
+let recipients;
 
 const TransferForm = (props) => (
   <div className="container">
@@ -28,30 +39,56 @@ const TransferForm = (props) => (
       <legend>Transfer</legend>
       <Form>
         <div className="row justify-content-start">
-          <div className="col-lg-2 text-center p-3">
-            <FormControl className={classes.formControl}>
-              <InputLabel id="handle">Handle</InputLabel>
-              <Select
-                labelId="handle"
-                id="handle"
-                value={handle}
-                onChange={handleSelect}
-              >
-                <MenuItem value="">
-                  <em>None</em>
-                </MenuItem>
-                <MenuItem value="Ten">Ten</MenuItem>
-                <MenuItem value="Twenty">Twenty</MenuItem>
-                <MenuItem value="Thirty">Thirty</MenuItem>
-              </Select>
-              <FormHelperText>
-                {errors.company && touched.company && errors.company}
-              </FormHelperText>
-            </FormControl>
+          <div className="col-lg-4 text-center p-3">
+            {/*
+              <FormControl className={classes.formControl}>
+                <InputLabel>Recipient</InputLabel>
+                <Select
+                  name="recipientName"
+                  value={props.values.recipient}
+                  onChange={handleSelect}
+                >
+                  {recipients.map((recipient) => (
+                    <MenuItem key={recipient.id} value={recipient.name}>
+                      {recipient.name} - {recipient.bankName}
+                    </MenuItem>
+                  ))}
+                </Select>
+              </FormControl>
+              */}
+            <Autocomplete
+              className={classes.formControl}
+              id="recipient"
+              name="recipientName"
+              options={recipients}
+              getOptionLabel={(option) => option.name}
+              style={{ width: 300 }}
+              onChange={(e, value) => {
+                console.log(value);
+                props.setFieldValue(
+                  "recipientName",
+                  value !== null ? value.name : ""
+                );
+              }}
+              renderInput={(params) => (
+                <TextField label="Recipient" name="recipientName" {...params} />
+              )}
+            />
           </div>
+          {/*
           <div className="col-lg-2 text-center p-3">
             <Field
               component={TextField}
+              name="recipientName"
+              type="text"
+              label="Recipient"
+            />
+          </div>
+          */}
+          <div className="col-lg-4 text-center p-3">
+            <Field
+              component={FormikTextField}
+              id="amount"
               name="amount"
               type="number"
               label="Amount"
@@ -79,7 +116,9 @@ const TransferForm = (props) => (
 const Transfer = () => {
   const [{ userInfo }, dispatch] = useStateValue();
   const history = useHistory();
-  const classes = useStyles();
+  recipients = userInfo.user.recipients;
+  const [recipient, setRecipient] = useState("");
+  classes = useStyles();
   return (
     <div>
       {!userInfo && history.push("/login")}
@@ -89,8 +128,8 @@ const Transfer = () => {
           <div>
             <Formik
               initialValues={{
-                amount: null,
                 recipientName: "",
+                amount: null,
               }}
               validationSchema={TransferSchema}
               onSubmit={(values, actions) => {

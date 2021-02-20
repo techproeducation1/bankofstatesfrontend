@@ -51,6 +51,9 @@ const typographyStyle = {
   dangerText: {
     color: dangerColor[0],
   },
+  formControl: {
+    minWidth: 100,
+  },
 };
 
 export default typographyStyle;
