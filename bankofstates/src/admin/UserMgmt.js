@@ -3,7 +3,6 @@ import { useStateValue } from "../StateProvider";
 import { useHistory } from "react-router";
 import bankService from "../service/bankService";
 import UserDetails from "./UserDetails";
-import { unstable_createMuiStrictModeTheme } from "@material-ui/core";
 
 const UserMgmt = () => {
   const [users, setUsers] = useState([]);

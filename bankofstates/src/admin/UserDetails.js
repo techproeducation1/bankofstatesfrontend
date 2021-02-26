@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
+import { Button } from "@material-ui/core";
 import Paper from "@material-ui/core/Paper";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
@@ -9,8 +10,14 @@ import TableHead from "@material-ui/core/TableHead";
 import TablePagination from "@material-ui/core/TablePagination";
 import TableRow from "@material-ui/core/TableRow";
 import styles from "../styles/dashboardStyle.js";
+import bankService from "../service/bankService";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { useHistory } from "react-router";
+import DeleteIcon from "@material-ui/icons/Delete";
 const useStyles = makeStyles(styles);
 
+let rows = [];
 const columns = [
   { id: "firstName", label: "First Name", minWidth: 200 },
   { id: "lastName", label: "Last Name", minWidth: 200 },
@@ -23,9 +30,10 @@ const columns = [
 
 export default function UserDetails(props) {
   const classes = useStyles();
-  const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(10);
-  const rows = props.users;
+  const [page, setPage] = useState(0);
+  const [rowsPerPage, setRowsPerPage] = useState(10);
+  rows = props.users;
+  const history = useHistory();
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };
@@ -35,11 +43,23 @@ export default function UserDetails(props) {
     setPage(0);
   };
 
+  const handleDelete = (id) => {
+    bankService.deleteUser(id).then((response) => {
+      if (response.status === 200) {
+        history.push("/admin");
+      } else {
+        toast.success("Unable to Deleted the User", {
+          position: toast.POSITION.TOP_CENTER,
+        });
+      }
+    });
+  };
+  const deleteStyle = { cursor: "pointer", color: "brown" };
   return (
     <Paper className={classes.root}>
       <fieldset>
         <legend>
-          <h1 className={classes.cardTitle}>User Details</h1>
+          <h1 className={classes.successText}>User Details</h1>
         </legend>
         <TableContainer className={classes.container}>
           <Table stickyHeader aria-label="sticky table">
@@ -54,6 +74,7 @@ export default function UserDetails(props) {
                     {column.label}
                   </TableCell>
                 ))}
+                <TableCell>Action</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -72,6 +93,12 @@ export default function UserDetails(props) {
                           </TableCell>
                         );
                       })}
+                      <TableCell>
+                        <DeleteIcon
+                          style={deleteStyle}
+                          onClick={() => handleDelete(row.userId)}
+                        />
+                      </TableCell>
                     </TableRow>
                   );
                 })}
@@ -87,6 +114,7 @@ export default function UserDetails(props) {
           onChangePage={handleChangePage}
           onChangeRowsPerPage={handleChangeRowsPerPage}
         />
+        <ToastContainer />
       </fieldset>
     </Paper>
   );
